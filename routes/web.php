@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissonController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
@@ -24,4 +25,11 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('permission', PermissonController::class);
+Route::prefix('admin')->middleware(['auth'])->group(function(){
+
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    //Permissions
+    Route::resource('permissions', PermissonController::class);
+});
+

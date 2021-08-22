@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MassDestroyPermissonRequest;
 use App\Http\Requests\StorePermissonRequest;
 use App\Http\Requests\UpdatePermissonRequest;
 use App\Models\Permission;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,11 +20,10 @@ class PermissonController extends Controller
     public function index()
     {
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        
         $permission = Permission::all();
         return view('admin.permissions.index', compact('permission'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -47,7 +46,7 @@ class PermissonController extends Controller
     {
         Permission::create($request->all());
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('permissions.index');
     }
 
     /**
@@ -87,7 +86,7 @@ class PermissonController extends Controller
     {
         $permission->update($request->all());
 
-        return redirect()->route('admin.permissions.index');
+        return redirect()->route('permissions.index');
     }
 
     /**
@@ -99,7 +98,14 @@ class PermissonController extends Controller
     public function destroy(Permission $permission)
     {
         abort_if(Gate::denies('permission_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        $permission->delete();
+        
+        $permission->delete(); 
         return back();
+    }
+
+    public function massDestroy(MassDestroyPermissonRequest $request) {
+        Permission::whereIn('id', request('ids'))->delete();
+
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <h1><a href="{{ route('permission.index') }}">permission</a></h1>
+                    <h1><a href="{{ route('dashboard') }}">Admin</a></h1>
 
                     {{ __('You are logged in!') }}
                 </div>
