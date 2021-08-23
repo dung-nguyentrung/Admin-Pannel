@@ -10,8 +10,12 @@
                     <h4 class="mb-3">Danh sách quyền truy cập</h4>
                 </div>
                 <div>
-                    <a href="#" class="btn btn-danger add-list"><i class="las la-trash"></i>Xóa lựa chọn</a>
-                    <a href="{{ route('permissions.create') }}" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm quyền truy cập</a>
+                    @can('permission_delete')                        
+                    <a href="#" id="deleteAll" class="btn btn-danger add-list"><i class="las la-trash"></i>Xóa lựa chọn</a>
+                    @endcan
+                    @can('permission_create')
+                    <a href="{{ route('permissions.create') }}" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm quyền truy cập</a>                        
+                    @endcan
                 </div>
             </div>
         </div>
@@ -22,8 +26,8 @@
                     <tr class="ligth ligth-data">
                         <th>
                             <div class="checkbox d-inline-block">
-                                <input type="checkbox" class="checkbox-input" id="ids.*">
-                                <label for="checkbox1" class="mb-0"></label>
+                                <input type="checkbox" class="checkbox-input" id="selectAll">
+                                <label for="selectAll" class="mb-0"></label>
                             </div>
                         </th>
                         <th>STT</th>
@@ -36,8 +40,8 @@
                     <tr>
                         <td>
                             <div class="checkbox d-inline-block">
-                                <input type="checkbox" class="checkbox-input" id="ids[]">
-                                <label for="checkbox3" class="mb-0"></label>
+                                <input type="checkbox" value="{{ $item->id }}" class="checkbox-input" name="ids">
+                                <label for="ids" class="mb-0"></label>
                             </div>
                         </td>
                         <td>{{ $loop->iteration }}</td>
@@ -52,7 +56,7 @@
                                 <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-original-title="Edit"
                                     href="{{ route('permissions.edit',['permission' => $item->id]) }}"><i class="ri-pencil-line mr-0"></i></a>                                    
                                 @endcan
-                                @can('permission_delete', Model::class)
+                                @can('permission_delete')
                                 <form action="{{ route('permissions.destroy',['permission' => $item->id]) }}" method="POST" id="cateForm{{ $item->id }}">
                                     @csrf
                                     @method('delete')

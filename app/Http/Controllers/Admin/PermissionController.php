@@ -10,7 +10,7 @@ use App\Models\Permission;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
-class PermissonController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -106,6 +106,6 @@ class PermissonController extends Controller
     public function massDestroy(MassDestroyPermissonRequest $request) {
         Permission::whereIn('id', request('ids'))->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return back();
     }
 }

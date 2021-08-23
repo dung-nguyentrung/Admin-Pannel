@@ -14,8 +14,9 @@
                     <a href="{{ route('permissions.index') }}" class="btn btn-primary float-right">Quay lại</a>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('permissions.store') }}" method="POST" data-toggle="validator">
+                    <form action="{{ route('permissions.update', ['permission' => $permission->id]) }}" method="POST" data-toggle="validator">
                         @csrf
+                        @method('put')
                         <div class="row">         
                             <div class="col-md-12">
                                     <div class="form-group">

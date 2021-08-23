@@ -7,10 +7,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- favicon icon -->
-    <link rel="shortcut icon" href="{{ asset('images/logo-img.png') }}" />
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/backend-plugin.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/backend.css%3Fv=1.0.0.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/line-awesome/dist/line-awesome/css/line-awesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/remixicon/fonts/remixicon.css') }}">
@@ -164,6 +163,9 @@
 
     <!-- app JavaScript -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    
+    <!-- main JavaScript -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
     @stack('scripts')
 </body>
