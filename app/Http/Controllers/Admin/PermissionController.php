@@ -39,7 +39,7 @@ class PermissionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StorePermissonRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StorePermissonRequest $request)
@@ -78,7 +78,7 @@ class PermissionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdatePermissonRequest  $request
      * @param  \App\Models\Permission  $permission
      * @return \Illuminate\Http\Response
      */
@@ -103,6 +103,12 @@ class PermissionController extends Controller
         return back();
     }
 
+    /**
+     * Remove the specified resource from storage.
+     * 
+     * @param \App\Http\Requests\MassDestroyPermissonRequest $request
+     * @return \Illuminate\Http\Response
+     */
     public function massDestroy(MassDestroyPermissonRequest $request) {
         Permission::whereIn('id', request('ids'))->delete();
 
