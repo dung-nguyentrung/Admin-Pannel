@@ -77,7 +77,7 @@
                                 @endcan
                                 @can('user_access')
                                 <li class="">
-                                    <a href="">
+                                    <a href="{{ route('users.index') }}">
                                         <img src="{{ asset('assets/images/icons/list-user.png') }}" class="icon-left-bar" alt="Role">
                                         <i class="las la-minus"></i><span>Người dùng</span>
                                     </a>
