@@ -35,6 +35,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::resource('permissions', PermissionController::class);
 
     //Roles
+    Route::delete('roles/massDestroy', [RoleController::class, 'massDestroy']);
     Route::resource('roles', RoleController::class);
 });
 

@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     @can('role_delete')                        
-                    <a href="#" id="deleteAll" class="btn btn-danger add-list"><i class="las la-trash"></i>Xóa lựa chọn</a>
+                    <a href="#" id="deleteSelectRole" class="btn btn-danger add-list"><i class="las la-trash"></i>Xóa lựa chọn</a>
                     @endcan
                     @can('role_create')
                     <a href="{{ route('roles.create') }}" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm vai trò</a>                        
@@ -88,22 +88,22 @@
                     $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
                 });
 
-                $("#deleteAll").on("click", function () {
+                $("#deleteSelectRole").on("click", function () {
                     var ids = [];
                     $.each($("input[name='ids']:checked"), function() {
                         ids.push($(this).val());
                     });
-
+                    
                     $.ajax({
                         type: "DELETE",
-                        url: 'permissions/massDestroy',
+                        url: 'roles/massDestroy',
                         data: {
                             ids: ids,
                             _token: $('meta[name="csrf-token"]').attr('content')
                         },
                         dataType: "json",
                         success: function (response) {
-                            
+                            location.reload(); 
                         }
                     });
                 });

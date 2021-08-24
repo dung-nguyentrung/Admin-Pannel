@@ -98,7 +98,7 @@
                         },
                         dataType: "json",
                         success: function (response) {
-                            
+                            location.reload(); 
                         }
                     });
                 });

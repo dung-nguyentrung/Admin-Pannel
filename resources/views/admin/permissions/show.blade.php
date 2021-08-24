@@ -11,7 +11,7 @@
                     <h4 class="mb-3">{{ $permission->title }}</h4>
                 </div>
                 <div>
-                    @can('permission_create')
+                    @can('permission_access')
                     <a href="{{ route('permissions.index') }}" class="btn btn-primary add-list"></i>Quay lại</a>                        
                     @endcan
                 </div>
