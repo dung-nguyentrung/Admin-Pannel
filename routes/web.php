@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +33,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     //Permissions
     Route::delete('permissions/massDestroy', [PermissionController::class, 'massDestroy']);
     Route::resource('permissions', PermissionController::class);
+
+    //Roles
+    Route::resource('roles', RoleController::class);
 });
 

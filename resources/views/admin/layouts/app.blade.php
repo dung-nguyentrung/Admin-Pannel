@@ -59,24 +59,30 @@
                                 </svg>
                             </a>
                             <ul id="product" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
+                                @can('permission_access')
                                 <li class="">
                                     <a href="{{ route('permissions.index') }}">
                                         <img src="{{ asset('assets/images/icons/permission.png') }}" class="icon-left-bar" alt="Permission">
                                         <i class="las la-minus"></i><span>Quyền truy cập</span>
                                     </a>
-                                </li>
+                                </li>                                    
+                                @endcan
+                                @can('role_access')
                                 <li class="">
-                                    <a href="">
+                                    <a href="{{ route('roles.index') }}">
                                         <img src="{{ asset('assets/images/icons/role.png') }}" class="icon-left-bar" alt="Role">
                                         <i class="las la-minus"></i><span>Vai trò</span>
                                     </a>
-                                </li>
+                                </li>                                    
+                                @endcan
+                                @can('user_access')
                                 <li class="">
                                     <a href="">
                                         <img src="{{ asset('assets/images/icons/list-user.png') }}" class="icon-left-bar" alt="Role">
                                         <i class="las la-minus"></i><span>Người dùng</span>
                                     </a>
-                                </li>
+                                </li>                                    
+                                @endcan
                             </ul>
                         </li>
                     </ul>
@@ -163,9 +169,6 @@
 
     <!-- app JavaScript -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    
-    <!-- main JavaScript -->
-    <script src="{{ asset('assets/js/main.js') }}"></script>
 
     @stack('scripts')
 </body>
