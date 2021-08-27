@@ -15,7 +15,7 @@ class CreateColumnUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_photo')->nullable();
-            $table->tinyInteger('phone_number')->unique()->nullable();
+            $table->integer('phone_number')->unique()->nullable();
             $table->string('address')->nullable();
         });
     }

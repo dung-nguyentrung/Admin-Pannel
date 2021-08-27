@@ -1,3 +1,9 @@
 .icon-left-bar {
     width: 25px !important;
 }
+
+#profile_photo {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}

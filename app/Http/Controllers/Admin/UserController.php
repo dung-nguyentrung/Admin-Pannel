@@ -45,8 +45,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
-        $user->addMedia(storage_path('app/public/users/').$request->input('profile_photo'))->toMediaCollection();
-
+        
         return redirect()->route('users.index');
     }
 
