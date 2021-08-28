@@ -7,7 +7,6 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -51,8 +50,7 @@ class UserController extends Controller
         $user->roles()->sync($request->input('roles', []));
         
         if ($request->input('profile_photo', true)) {
-            $user->addMedia($request->profile_photo)
-            ->toMediaCollection();
+            $user->addMedia($request->profile_photo)->toMediaCollection();
         }
         
         return redirect()->route('users.index');
