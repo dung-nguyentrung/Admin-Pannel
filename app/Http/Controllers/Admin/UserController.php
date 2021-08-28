@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Role;
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,8 +34,9 @@ class UserController extends Controller
     public function create()
     {
         abort_if(Gate::denies('user_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
-        return view('admin.users.create');
+        $role = Role::all();
+
+        return view('admin.users.create', compact('role'));
     }
 
     /**
@@ -45,6 +48,12 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $user = User::create($request->all());
+        $user->roles()->sync($request->input('roles', []));
+        
+        if ($request->input('profile_photo', true)) {
+            $user->addMedia($request->profile_photo)
+            ->toMediaCollection();
+        }
         
         return redirect()->route('users.index');
     }
@@ -71,8 +80,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         abort_if(Gate::denies('user_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $role = Role::all()->pluck('title', 'id');
 
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user','role'));
     }
 
     /**
@@ -85,6 +95,15 @@ class UserController extends Controller
     public function update(UpdateUserRequest $request, User $user)
     {
         $user->update($request->all());
+        $user->roles()->sync($request->input('roles', []));
+        
+        if ($request->hasFile('profile_photo')) {
+            
+            if ($user->getFirstMedia()) {
+                $user->getFirstMedia()->delete();
+            }
+            $user->addMedia($request->profile_photo)->toMediaCollection();
+        }
 
         return redirect()->route('users.index');
     }

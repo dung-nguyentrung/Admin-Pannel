@@ -31,6 +31,7 @@
                             </div>
                         </th>
                         <th>STT</th>
+                        <th>Hình ảnh</th>
                         <th>Họ tên</th>
                         <th>Email</th>
                         <th>Điện thoại</th>
@@ -49,6 +50,9 @@
                             </div>
                         </td>
                         <td>{{ $loop->iteration }}</td>
+                        <td>
+                            <img src="{{ $item->getFirstMediaUrl() }}" width="120" alt="{{ $item->name }}">
+                        </td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->phone_number }}</td>

@@ -5,42 +5,26 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-3 col-lg-4">
+        <div class="col-xl-12 col-lg-8">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="header-title">
                         <h4 class="card-title">Thêm mới người dùng</h4>
                     </div>
-                </div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                            <div class="crm-profile-img-edit position-relative">
-                                <img class="crm-profile-pic rounded avatar-100" src="user-profile_files/11.png"
-                                    alt="profile-pic">
-                                <div class="crm-p-image bg-primary">
-                                    <label for="profile_photo" style="cursor: pointer;"><i class="las la-pen upload-button"></i></label>
-                                    <input class="file-upload" name="profile_photo" type="file" accept="image/*">
-                                </div>
-                                @error('profile_photo')
-                                    <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>                            
-                        </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-9 col-lg-8">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="header-title">
-                        <h4 class="card-title">Thông tin cá nhân</h4>
-                    </div>
+                    <a href="{{ route('users.index') }}" class="float-right btn btn-primary">Quay lại</a>
                 </div>
                 <div class="card-body">
                     <div class="new-user-info">
+                        <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="name">Hình ảnh:</label>
+                                    <input type="file" class="form-control" name="profile_photo">
+                                    @error('profile_photo')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="name">Họ tên:</label>
                                     <input type="text" class="form-control" name="name" placeholder="Họ tên">
@@ -69,6 +53,14 @@
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label for="Role">Vai trò:</label>
+                                    <select name="roles[]" class="js-select-2 form-control" multiple>
+                                        @foreach ($role as $role)
+                                            <option value="{{ $role->id }}">{{ $role->title }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
@@ -96,3 +88,10 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.js-select-2').select2();
+        });
+    </script>
+@endpush

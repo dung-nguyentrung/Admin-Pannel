@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 use Symfony\Component\HttpFoundation\Response;
 
 class StoreUserRequest extends FormRequest
@@ -52,7 +54,7 @@ class StoreUserRequest extends FormRequest
             ],
             'repeatpassword' => [
                 'same:password'
-            ]
+            ]            
         ];
     }
 }

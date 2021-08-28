@@ -41,7 +41,7 @@
                 <nav class="iq-sidebar-menu">
                     <ul id="iq-sidebar-toggle" class="iq-menu">
                         <li class="active">
-                            <a href="/dashboard" class="svg-icon">
+                            <a href="{{ route('dashboard') }}" class="svg-icon">
                                 <img src="{{ asset('assets/images/icons/dashboard.png') }}" class="icon-left-bar" alt="Dashboard">
                                 <span class="ml-4">Tổng quan</span>
                             </a>
@@ -118,7 +118,7 @@
                                 <li class="nav-item nav-icon dropdown caption-content">
                                     <a href="#" class="search-toggle dropdown-toggle" id="dropdownMenuButton4"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src="{{ asset('assets/images/user/01.jpg') }}" class="img-fluid rounded"
+                                        <img src="{{ Auth::user()->getFirstMediaUrl() }}" class="img-fluid rounded"
                                             alt="user">
                                     </a>
                                     <div class="iq-sub-dropdown dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -127,7 +127,7 @@
                                                 <div class="media-body profile-detail text-center">
                                                     <img src="{{ asset('assets/images/page-img/profile-bg.jpg') }}"
                                                         alt="profile-bg" class="rounded-top img-fluid mb-4">
-                                                    <img src="{{ asset('assets/images/user/01.jpg') }}" alt="profile-img"
+                                                    <img src="{{ Auth::user()->getFirstMediaUrl() }}" alt="profile-img"
                                                         class="rounded profile-img img-fluid avatar-70">
                                                 </div>
                                                 <div class="p-3">
