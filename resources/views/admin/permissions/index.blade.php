@@ -50,17 +50,17 @@
                             <div class="d-flex align-items-center list-action">
                                 @can('permission_show')
                                 <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" data-original-title="View"
-                                    href="{{ route('permissions.show',['permission' => $item->id]) }}"><i class="ri-eye-line mr-0"></i></a>                                    
+                                    href="{{ route('permissions.show',['permission' => $item->id]) }}"><i class="fa fa-eye mr-0"></i></a>                                    
                                 @endcan
                                 @can('permission_edit')
                                 <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-original-title="Edit"
-                                    href="{{ route('permissions.edit',['permission' => $item->id]) }}"><i class="ri-pencil-line mr-0"></i></a>                                    
+                                    href="{{ route('permissions.edit',['permission' => $item->id]) }}"><i class="fa fa-pen mr-0"></i></a>                                    
                                 @endcan
                                 @can('permission_delete')
                                 <form action="{{ route('permissions.destroy',['permission' => $item->id]) }}" method="POST" id="cateForm{{ $item->id }}">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger" type="submit"><i class="ri-delete-bin-line mr-0"></i></button>
+                                    <button class="btn btn-danger" type="submit"><i class="fa fa-trash-alt mr-0"></i></button>
                                 </form>                                    
                                 @endcan
                             </div>

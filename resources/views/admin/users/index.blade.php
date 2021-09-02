@@ -66,17 +66,17 @@
                             <div class="d-flex align-items-center list-action">
                                 @can('user_show')
                                 <a class="badge badge-info mr-2" data-toggle="tooltip" data-placement="top" title="Xem chi tiết" data-original-title="View"
-                                    href="{{ route('users.show',['user' => $item->id]) }}"><i class="ri-eye-line mr-0"></i></a>                                    
+                                    href="{{ route('users.show',['user' => $item->id]) }}"><i class="fa fa-eye mr-0"></i></a>                                    
                                 @endcan
                                 @can('user_edit')
                                 <a class="badge bg-success mr-2" data-toggle="tooltip" data-placement="top" title="Cập nhật" data-original-title="Edit"
-                                    href="{{ route('users.edit',['user' => $item->id]) }}"><i class="ri-pencil-line mr-0"></i></a>                                    
+                                    href="{{ route('users.edit',['user' => $item->id]) }}"><i class="fa fa-pen mr-0"></i></a>                                    
                                 @endcan
                                 @can('user_delete')
                                 <form action="{{ route('users.destroy',['user' => $item->id]) }}" method="POST" id="cateForm{{ $item->id }}">
                                     @csrf
                                     @method('delete')
-                                    <button class="btn btn-danger" type="submit"><i class="ri-delete-bin-line mr-0"></i></button>
+                                    <button class="btn btn-danger" type="submit"><i class="fa fa-trash-alt mr-0"></i></button>
                                 </form>                                    
                                 @endcan
                             </div>

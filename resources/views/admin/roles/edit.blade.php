@@ -30,12 +30,12 @@
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="permissions">Quyền truy cập</label>
                                     <a href="#" id="selectAll" class="btn btn-success ml-3">Chọn tất cả</a>
                                     <a href="#" id="deselectAll" class="btn btn-danger ml-3">Bỏ chọn tất cả</a>
-                                    <select name="permissions[]" class="form-control permission-list" multiple>
+                                    <select name="permissions[]" class="form-control permission-list" multiple="multiple">
                                         @foreach ($permissions as $id =>  $permissions)
                                             <option value="{{ $id }}" {{ (in_array($id, old('permissions', [])) || isset($role) && $role->permissions->contains($id)) ? 'selected' : '' }}>{{ $permissions }}</option>    
                                         @endforeach
