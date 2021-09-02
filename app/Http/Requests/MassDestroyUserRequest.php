@@ -29,7 +29,7 @@ class MassDestroyUserRequest extends FormRequest
     {
         return [
             'ids'   => 'required|array',
-            'ids.*' => 'exists:roles,id',
+            'ids.*' => 'exists:users,id',
         ];
     }
 
@@ -41,7 +41,7 @@ class MassDestroyUserRequest extends FormRequest
                 'array' => 'Vui lòng sử dụng mảng',
             ],
             'ids.*' => [
-                'exists' => 'Mã quyền truy cập này không tồn tại'
+                'exists' => 'Mã người dùng này không tồn tại'
             ]
         ];
     }

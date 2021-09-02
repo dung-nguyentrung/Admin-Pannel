@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="new-user-info">
-                        <img src="{{ $user->getFirstMediaUrl() }}" width="120" alt="{{ $user->name }}">                        
+                        <img src="{{ $user->getFirstMediaUrl('users') }}" width="120" alt="{{ $user->name }}">                        
                         <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}" enctype="multipart/form-data">
                             @csrf
                             @method('put')

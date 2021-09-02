@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Role;
@@ -50,7 +51,7 @@ class UserController extends Controller
         $user->roles()->sync($request->input('roles', []));
         
         if ($request->input('profile_photo', true)) {
-            $user->addMedia($request->profile_photo)->toMediaCollection();
+            $user->addMedia($request->profile_photo)->toMediaCollection('users');
         }
         
         return redirect()->route('users.index');
@@ -95,12 +96,12 @@ class UserController extends Controller
         $user->update($request->all());
         $user->roles()->sync($request->input('roles', []));
         
-        if ($request->hasFile('profile_photo')) {
+        if ($request->hasFile('profile_photo', true)) {
             
-            if ($user->getFirstMedia()) {
-                $user->getFirstMedia()->delete();
+            if ($user->getFirstMedia('users')) {
+                $user->getFirstMedia('users')->delete();
             }
-            $user->addMedia($request->profile_photo)->toMediaCollection();
+            $user->addMedia($request->profile_photo)->toMediaCollection('users');
         }
 
         return redirect()->route('users.index');
@@ -118,5 +119,11 @@ class UserController extends Controller
         $user->delete();
 
         return back();
+    }
+
+    public function massDestroy(MassDestroyUserRequest $request) {
+        User::whereIn('id', request('ids'))->delete();
+        
+        return response(null, Response::HTTP_NO_CONTENT);
     }
 }

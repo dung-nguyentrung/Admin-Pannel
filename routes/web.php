@@ -40,6 +40,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function(){
     Route::resource('roles', RoleController::class);
 
     //Users 
+    Route::delete('users/massDestroy', [UserController::class, 'massDestroy']);
     Route::resource('users', UserController::class);
 });
 

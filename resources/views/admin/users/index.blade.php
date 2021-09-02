@@ -11,7 +11,7 @@
                 </div>
                 <div>
                     @can('user_delete')                        
-                    <a href="#" id="deleteAll" class="btn btn-danger add-list"><i class="las la-trash"></i>Xóa lựa chọn</a>
+                    <a href="#" id="deleteAllUserSelected" class="btn btn-danger add-list"><i class="las la-trash"></i>Xóa lựa chọn</a>
                     @endcan
                     @can('user_create')
                     <a href="{{ route('users.create') }}" class="btn btn-primary add-list"><i class="las la-plus mr-3"></i>Thêm người dùng</a>                        
@@ -51,7 +51,7 @@
                         </td>
                         <td>{{ $loop->iteration }}</td>
                         <td>
-                            <img src="{{ $item->getFirstMediaUrl() }}" width="120" alt="{{ $item->name }}">
+                            <img src="{{ $item->getFirstMediaUrl('users') }}" width="120" alt="{{ $item->name }}">
                         </td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->email }}</td>
@@ -99,7 +99,7 @@
                     $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
                 });
 
-                $("#deleteAll").on("click", function () {
+                $("#deleteAllUserSelected").on("click", function () {
                     var ids = [];
                     $.each($("input[name='ids']:checked"), function() {
                         ids.push($(this).val());
